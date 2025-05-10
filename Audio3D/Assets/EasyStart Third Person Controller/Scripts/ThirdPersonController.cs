@@ -32,6 +32,8 @@ public class ThirdPersonController : MonoBehaviour
 
     float jumpElapsedTime = 0;
 
+    public GameObject menu;
+
     // Player states
     bool isJumping = false;
     bool isSprinting = false;
@@ -43,7 +45,7 @@ public class ThirdPersonController : MonoBehaviour
     bool inputJump;
     bool inputCrouch;
     bool inputSprint;
-
+     bool inputMenu;
     Animator animator;
     CharacterController cc;
 
@@ -52,6 +54,7 @@ public class ThirdPersonController : MonoBehaviour
 
     public Transform floorDetectorTransform;
 
+    private bool menuIsActive;
     public enum FloorType
     {
         Normal,
@@ -62,6 +65,7 @@ public class ThirdPersonController : MonoBehaviour
 
     void Start()
     {
+        menuIsActive = false;
         cc = GetComponent<CharacterController>();
         animator = GetComponent<Animator>();
 
@@ -83,6 +87,8 @@ public class ThirdPersonController : MonoBehaviour
         inputSprint = Input.GetAxis("Fire3") == 1f;
         // Unfortunately GetAxis does not work with GetKeyDown, so inputs must be taken individually
         inputCrouch = Input.GetKeyDown(KeyCode.LeftControl) || Input.GetKeyDown(KeyCode.JoystickButton1);
+
+        inputMenu = Input.GetKeyDown(KeyCode.Escape);
 
         // Check if you pressed the crouch input key and change the player's state
         if ( inputCrouch )
@@ -119,11 +125,44 @@ public class ThirdPersonController : MonoBehaviour
             //isCrouching = false; 
         }
 
+        if (inputMenu && menuIsActive == false)
+        {
+         Debug.Log("Menu is active");
+            ShowMenu();
+
+        }
+        else if (inputMenu && menuIsActive == true)
+        {
+            Debug.Log("Menu is not active");
+            UnShowMenu();
+        }
+
+
+
         HeadHittingDetect();
 
     }
 
+void ShowMenu()
+    {
+        UnityEngine.Cursor.lockState = CursorLockMode.None;
+        UnityEngine.Cursor.visible = true;
+        menu.SetActive(true);
 
+        Time.timeScale = 0;
+        menuIsActive = true;
+        
+    }
+    void UnShowMenu()
+    {
+
+        UnityEngine.Cursor.lockState = CursorLockMode.Locked;
+        UnityEngine.Cursor.visible = false;
+        menu.SetActive(false);
+        Time.timeScale = 1f;
+        menuIsActive = false;
+       
+    }
     // With the inputs and animations defined, FixedUpdate is responsible for applying movements and actions to the player
     private void FixedUpdate()
     {
