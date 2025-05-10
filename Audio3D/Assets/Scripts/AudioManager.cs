@@ -7,6 +7,8 @@ public class AudioManager : MonoBehaviour
 
     public static AudioManager instance;
 
+    [SerializeField] private ThirdPersonController playerController;
+
     [Header("Music")]
     [SerializeField] private AudioSource musicSource;
 
@@ -20,6 +22,11 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioSource WCSource;
     [SerializeField] private BoxCollider WCTrigger;
 
+    [Header("Footsteps")]
+    [SerializeField] private AudioSource footStepSource;
+    [SerializeField] private List<AudioClip> normalFloorFootStepClips;
+    [SerializeField] private List<AudioClip> carpetFloorFootStepClips;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -32,6 +39,11 @@ public class AudioManager : MonoBehaviour
         if(!radioSource.isPlaying)
         {
             PlayRadio();
+        }
+
+        if (!footStepSource.isPlaying && playerController.isMoving)
+        {
+            PlayFootSteps();
         }
 
     }
@@ -60,5 +72,21 @@ public class AudioManager : MonoBehaviour
     {
         yield return new WaitForSeconds(5f);
         WCTrigger.enabled = true;
+    }
+
+    public void PlayFootSteps()
+    {
+        if (playerController.floorType == ThirdPersonController.FloorType.Normal)
+        {
+            int randomIndex = Random.Range(0, normalFloorFootStepClips.Count);
+            footStepSource.clip = normalFloorFootStepClips[randomIndex];
+            footStepSource.Play();
+        }
+        else if (playerController.floorType == ThirdPersonController.FloorType.Carpet)
+        {
+            int randomIndex = Random.Range(0, carpetFloorFootStepClips.Count);
+            footStepSource.clip = carpetFloorFootStepClips[randomIndex];
+            footStepSource.Play();
+        }
     }
 }

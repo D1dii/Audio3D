@@ -1,6 +1,8 @@
 ﻿
 using UnityEditor.VersionControl;
 using UnityEngine;
+using System.Collections.Generic;
+using System.Collections;
 
 /*
     This file has a commented version with details about how each line works. 
@@ -46,6 +48,17 @@ public class ThirdPersonController : MonoBehaviour
     CharacterController cc;
 
     [SerializeField] private GameObject interactBubble;
+    public bool isMoving = false;
+
+    public Transform floorDetectorTransform;
+
+    public enum FloorType
+    {
+        Normal,
+        Carpet,
+    }
+
+    [SerializeField] public FloorType floorType;
 
     void Start()
     {
@@ -65,6 +78,7 @@ public class ThirdPersonController : MonoBehaviour
         // Input checkers
         inputHorizontal = Input.GetAxis("Horizontal");
         inputVertical = Input.GetAxis("Vertical");
+        isMoving = inputHorizontal != 0 || inputVertical != 0;
         inputJump = Input.GetAxis("Jump") == 1f;
         inputSprint = Input.GetAxis("Fire3") == 1f;
         // Unfortunately GetAxis does not work with GetKeyDown, so inputs must be taken individually
@@ -113,6 +127,7 @@ public class ThirdPersonController : MonoBehaviour
     // With the inputs and animations defined, FixedUpdate is responsible for applying movements and actions to the player
     private void FixedUpdate()
     {
+        
 
         // Sprinting velocity boost or crounching desacelerate
         float velocityAdittion = 0;
@@ -178,8 +193,28 @@ public class ThirdPersonController : MonoBehaviour
         Vector3 moviment = verticalDirection + horizontalDirection;
         cc.Move( moviment );
 
+        if (Physics.CheckSphere(floorDetectorTransform.position, 0.1f, LayerMask.GetMask("Floor")))
+        {
+            floorType = FloorType.Normal;
+        }
+        else if (Physics.CheckSphere(floorDetectorTransform.position, 0.1f, LayerMask.GetMask("Carpet")))
+        {
+            floorType = FloorType.Carpet;
+        }
+        else
+        {
+            floorType = FloorType.Normal;
+        }
+
+        
+
     }
 
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawSphere(floorDetectorTransform.position, 0.1f);
+    }
 
     //This function makes the character end his jump if he hits his head on something
     void HeadHittingDetect()
@@ -197,6 +232,8 @@ public class ThirdPersonController : MonoBehaviour
             isJumping = false;
         }
     }
+
+    
 
     private void OnTriggerEnter(Collider other)
     {
@@ -230,6 +267,9 @@ public class ThirdPersonController : MonoBehaviour
             interactBubble.SetActive(false);
         }
     }
+
+    
 }
+
 
 
