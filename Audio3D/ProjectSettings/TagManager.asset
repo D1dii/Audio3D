@@ -3,7 +3,9 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Toaster
+  - WC
   layers:
   - Default
   - TransparentFX

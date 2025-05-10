@@ -45,6 +45,7 @@ public class ThirdPersonController : MonoBehaviour
     Animator animator;
     CharacterController cc;
 
+    [SerializeField] private GameObject interactBubble;
 
     void Start()
     {
@@ -197,4 +198,38 @@ public class ThirdPersonController : MonoBehaviour
         }
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Toaster"))
+        {
+            AudioManager.instance.PlayToaster();
+        }
+
+        if (other.CompareTag("WC"))
+        {
+            interactBubble.SetActive(true);
+        }
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.CompareTag("WC"))
+        { 
+            if (Input.GetKey(KeyCode.E) && interactBubble.activeSelf)
+            {
+                interactBubble.SetActive(false);
+                AudioManager.instance.PlayWC();
+            }
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("WC"))
+        {
+            interactBubble.SetActive(false);
+        }
+    }
 }
+
+
