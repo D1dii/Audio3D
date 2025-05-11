@@ -27,6 +27,11 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private List<AudioClip> normalFloorFootStepClips;
     [SerializeField] private List<AudioClip> carpetFloorFootStepClips;
 
+    [Header("Jump")]
+    [SerializeField] private AudioSource jumpSource;
+
+    private bool isJumping = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -41,13 +46,15 @@ public class AudioManager : MonoBehaviour
             PlayRadio();
         }
 
-        //if (!footStepSource.isPlaying && playerController.isMoving)
-        //{
-        //    PlayFootSteps();
-        //}
+        
 
     }
 
+    public void PlayJumpSound()
+    {
+        jumpSource.Play();
+        isJumping = true;
+    }
     public void PlayRadio()
     {
         int randomIndex = Random.Range(0, radioClips.Count);
@@ -76,6 +83,18 @@ public class AudioManager : MonoBehaviour
 
     public void PlayFootSteps()
     {
+        if (jumpSource.isPlaying)
+        {
+            return; 
+        }
+        if (isJumping && !jumpSource.isPlaying)
+        {
+            isJumping = false;
+            if (playerController.isMoving)
+            {
+                PlayFootSteps();
+            }
+        }
         if (playerController.floorType == ThirdPersonController.FloorType.Normal)
         {
             int randomIndex = Random.Range(0, normalFloorFootStepClips.Count);
