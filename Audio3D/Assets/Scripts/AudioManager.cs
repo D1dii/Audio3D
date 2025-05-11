@@ -41,10 +41,10 @@ public class AudioManager : MonoBehaviour
             PlayRadio();
         }
 
-        if (!footStepSource.isPlaying && playerController.isMoving)
-        {
-            PlayFootSteps();
-        }
+        //if (!footStepSource.isPlaying && playerController.isMoving)
+        //{
+        //    PlayFootSteps();
+        //}
 
     }
 

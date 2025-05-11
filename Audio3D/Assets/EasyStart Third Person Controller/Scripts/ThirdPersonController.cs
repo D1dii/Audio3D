@@ -143,6 +143,10 @@ public class ThirdPersonController : MonoBehaviour
 
     }
 
+    void PlayFootsteps()
+    {
+        AudioManager.instance.PlayFootSteps();  
+    }
 void ShowMenu()
     {
         UnityEngine.Cursor.lockState = CursorLockMode.None;
