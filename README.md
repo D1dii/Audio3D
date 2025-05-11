@@ -25,3 +25,5 @@ What sounds did we include?
 Link to download the Project: https://drive.google.com/drive/folders/1h6WoV5bIrKf6hhP06B4yQCMuogRvjFuQ?usp=sharing
 
 Si no te deja descargarlo, manda solicitud y te aceptaré para que puedas compartir
+
+O puedes mirar de descargarlo desde Github: https://github.com/D1dii/Audio3D
