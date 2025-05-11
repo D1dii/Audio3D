@@ -19,6 +19,7 @@ What sounds did we include?
 	- WC Sound when pressing "E" and being close to the WC
 - Footsteps and Jump SFX using keyframe events implementation in all player animations
 
+- Sound Mixers in the menus
 
 
 Link to download the Project: https://drive.google.com/drive/folders/1h6WoV5bIrKf6hhP06B4yQCMuogRvjFuQ?usp=sharing
