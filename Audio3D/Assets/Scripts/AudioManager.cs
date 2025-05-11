@@ -46,7 +46,12 @@ public class AudioManager : MonoBehaviour
             PlayRadio();
         }
 
-        
+        if (!playerController.isMoving)
+        {
+            footStepSource.Stop();
+        }
+
+                
 
     }
 
