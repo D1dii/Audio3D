@@ -5052,7 +5052,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1686324598}
   m_Direction: 0
   m_MinValue: -80
-  m_MaxValue: 0
+  m_MaxValue: 20
   m_WholeNumbers: 0
   m_Value: 0
   m_OnValueChanged:
@@ -15435,6 +15435,18 @@ PrefabInstance:
       objectReference: {fileID: 1175479267}
     - target: {fileID: 3310129599138967072, guid: 268bbd229edfdba45a4d45903e472716,
         type: 3}
+      propertyPath: Paused
+      value: 
+      objectReference: {fileID: -3376408729464778180, guid: b0eba04aae95bb74cb55bfd5cae2f12e,
+        type: 2}
+    - target: {fileID: 3310129599138967072, guid: 268bbd229edfdba45a4d45903e472716,
+        type: 3}
+      propertyPath: unPaused
+      value: 
+      objectReference: {fileID: 24500006, guid: b0eba04aae95bb74cb55bfd5cae2f12e,
+        type: 2}
+    - target: {fileID: 3310129599138967072, guid: 268bbd229edfdba45a4d45903e472716,
+        type: 3}
       propertyPath: interactBubble
       value: 
       objectReference: {fileID: 546525768}
@@ -19173,7 +19185,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1225556178}
   m_Direction: 0
   m_MinValue: -80
-  m_MaxValue: 0
+  m_MaxValue: 20
   m_WholeNumbers: 0
   m_Value: 0
   m_OnValueChanged:
@@ -41206,7 +41218,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 608654281}
   m_Direction: 0
   m_MinValue: -80
-  m_MaxValue: 0
+  m_MaxValue: 30
   m_WholeNumbers: 0
   m_Value: 0
   m_OnValueChanged:

@@ -3,6 +3,7 @@ using UnityEditor.VersionControl;
 using UnityEngine;
 using System.Collections.Generic;
 using System.Collections;
+using UnityEngine.Audio;
 
 /*
     This file has a commented version with details about how each line works. 
@@ -17,6 +18,10 @@ using System.Collections;
 /// </summary>
 public class ThirdPersonController : MonoBehaviour
 {
+  
+    public AudioMixerSnapshot unPaused;
+    public AudioMixerSnapshot Paused;
+
 
     [Tooltip("Speed ​​at which the character moves. It is not affected by gravity or jumping.")]
     public float velocity = 5f;
@@ -160,8 +165,9 @@ public class ThirdPersonController : MonoBehaviour
 
         Time.timeScale = 0;
         menuIsActive = true;
-        
+        Paused.TransitionTo(0.01f);
     }
+
     void UnShowMenu()
     {
 
@@ -170,7 +176,8 @@ public class ThirdPersonController : MonoBehaviour
         menu.SetActive(false);
         Time.timeScale = 1f;
         menuIsActive = false;
-       
+
+        unPaused.TransitionTo(0.01f);
     }
     // With the inputs and animations defined, FixedUpdate is responsible for applying movements and actions to the player
     private void FixedUpdate()
