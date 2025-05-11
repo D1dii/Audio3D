@@ -1,2 +1,23 @@
 # Audio3D
 
+Group: Dídac García, David Lastra and Oliver Santos
+
+What did we do?
+
+We created an Audio Manager in charge of having the functions to play all the necessary sound through code.
+We also created an AudioMixer to manage volumes of all the SFX and Music
+
+What sounds did we include?
+
+- Ambience Music
+- Environment 3D Audios
+	- Radio Sound
+	- Kitchen Sound
+	- Sink water drop sound
+- Trigger Sounds
+	- Toaster sound when approaching the toaster
+	- WC Sound when pressing "E" and being close to the WC
+- Footsteps and Jump SFX using keyframe events implementation in all player animations
+
+
+
